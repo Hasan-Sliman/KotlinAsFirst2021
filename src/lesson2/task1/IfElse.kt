@@ -70,6 +70,8 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  */
 fun ageDescription(age: Int): String = TODO()
 
+
+
 /**
  * Простая (2 балла)
  *
@@ -81,8 +83,33 @@ fun timeForHalfWay(
     t1: Double, v1: Double,
     t2: Double, v2: Double,
     t3: Double, v3: Double
-): Double = TODO()
+): Double {
+    var halfDistance = ( t1 * v1 + t2 * v2 + t3 * v3 ) / 2.0
 
+    // calculate distances
+    var d1 = t1 * v1
+    var d2 = t2 * v2
+    var d3 = t3 * v3
+
+    var partInDistance3 = halfDistance - d1 - d2
+    if(partInDistance3 < 0) {
+        partInDistance3 = 0.0
+    }
+    var partInDistance2 = halfDistance - d1 - partInDistance3
+    if(partInDistance2 < 0) {
+        partInDistance2 = 0.0
+    }
+
+    var partInDistance1 = halfDistance - partInDistance2 - partInDistance3
+
+
+    var timeIn1 = if (d1 != 0.0) (partInDistance1 / d1) else 1.0
+    var timeIn2 = if (d2 != 0.0) (partInDistance2 / d2) else 1.0
+    var timeIn3 = if (d3 != 0.0) (partInDistance3 / d3) else 1.0
+
+    return t1 * timeIn1 + t2 * timeIn2 + t3 * timeIn3
+
+}
 /**
  * Простая (2 балла)
  *
@@ -96,7 +123,20 @@ fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
-): Int = TODO()
+): Int {
+    var isChecked = 0
+    if (kingX == rookX1 || kingY == rookY1) {
+        isChecked = 1
+    }
+    if (kingX == rookX2 || kingY == rookY2) {
+        if (isChecked == 1) {
+            isChecked = 3
+        } else {
+            isChecked = 2
+        }
+    }
+    return isChecked
+}
 
 /**
  * Простая (2 балла)
@@ -108,11 +148,71 @@ fun whichRookThreatens(
  * и 3, если угроза есть и от ладьи и от слона.
  * Считать, что ладья и слон не могут загораживать друг друга.
  */
+
 fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int = TODO()
+): Int {
+    var isChecked = 0
+
+    // bishop X increase, Y increase
+    var newBishopX = bishopX
+    var newBishopY = bishopY
+    for (i in 1..8) {
+
+        newBishopX = bishopX + i
+        newBishopY = bishopY + i
+        if(newBishopX > 8 || newBishopY > 8 ) {
+            break
+        }
+        if (kingX == newBishopX && kingY == newBishopY) {
+            isChecked = 2
+        }
+    }
+    // bishop X increase, Y decrease
+    for (i in 1..8) {
+        newBishopX = bishopX + i
+        newBishopY = bishopY - i
+        if(newBishopX > 8 || newBishopY < 0) {
+            break
+        }
+        if (kingX == newBishopX && kingY == newBishopY) {
+            isChecked = 2
+        }
+    }
+    // bishop X decrease, Y increase
+    for (i in 1..8) {
+        newBishopX = bishopX - i
+        newBishopY = bishopY + i
+        if(newBishopX < 0 || newBishopY > 8) {
+            break
+        }
+        if (kingX == newBishopX && kingY == newBishopY) {
+            isChecked = 2
+        }
+    }
+    // bishop X decrease, Y decrease
+    for (i in 1..8) {
+        newBishopX = bishopX - i
+        newBishopY = bishopY - i
+        if(newBishopX < 0 || newBishopY < 0) {
+            break
+        }
+        if (kingX == newBishopX && kingY == newBishopY) {
+            isChecked = 2
+        }
+    }
+
+    if (kingX == rookX || kingY == rookY) {
+        if (isChecked == 2) {
+            isChecked = 3
+        } else {
+            isChecked = 1
+        }
+    }
+    return isChecked
+}
 
 /**
  * Простая (2 балла)

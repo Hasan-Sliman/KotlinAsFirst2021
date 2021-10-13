@@ -77,7 +77,11 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int  {
  * Определить длину того же отрезка в метрах (в данном случае 18.98).
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
-fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = TODO()
+fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
+    val inVershoks = ( (sagenes * 48) + (arshins * 16 ) + (vershoks))
+    val lengthInMeters = ( inVershoks * 0.04445)
+    println( " lengthInMeters= $lengthInMeters ")
+    return lengthInMeters }
 
 /**
  * Тривиальная (1 балл)
@@ -93,8 +97,14 @@ fun angleInRadian(deg: Int, min: Int, sec: Int): Double = TODO()
  * Найти длину отрезка, соединяющего точки на плоскости с координатами (x1, y1) и (x2, y2).
  * Например, расстояние между (3, 0) и (0, 4) равно 5
  */
-fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = TODO()
 
+fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double {
+    val dx = (x2 - x1)
+    val dy = (y2 - y1)
+    val trackLength = kotlin.math.sqrt((dx * dx) + (dy * dy))
+    println("trackLength = $trackLength")
+    return trackLength
+}
 /**
  * Простая (2 балла)
  *
@@ -119,8 +129,8 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Double  {
-    val increasingInOneYear = (100 / 100) + (percent / 100)
+fun accountInThreeYears(initial: Int, percent: Int): Double {
+    val increasingInOneYear = (100.0 / 100.0) + (percent / 100.0)
     val threeYearsIncreasing = increasingInOneYear * increasingInOneYear * increasingInOneYear
     val accountInThreeYears: Double = initial.toDouble() * threeYearsIncreasing
     println("accountInThreeYears = $accountInThreeYears")
