@@ -65,8 +65,11 @@ fun main() {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
-fun seconds(hours: Int, minutes: Int, seconds: Int): Int =  TODO()
-
+fun seconds(hours: Int, minutes: Int, seconds: Int): Int  {
+    val inSeconds: Int = ((hours * 3600) + (minutes * 60) + (seconds))
+    println(" Time In Seconds Is = $inSeconds: Int ")
+    return inSeconds
+}
 /**
  * Тривиальная (1 балл)
  *
@@ -116,7 +119,16 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
+fun accountInThreeYears(initial: Int, percent: Int): Double  {
+    val increasingInOneYear = (100 / 100) + (percent / 100)
+    val threeYearsIncreasing = increasingInOneYear * increasingInOneYear * increasingInOneYear
+    val accountInThreeYears: Double = initial.toDouble() * threeYearsIncreasing
+    println("accountInThreeYears = $accountInThreeYears")
+    return accountInThreeYears
+}
+
+
+
 
 /**
  * Простая (2 балла)
