@@ -2,15 +2,20 @@
 
 package lesson2.task2
 
-import lesson1.task1.sqr
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 /**
  * Пример
  *
  * Лежит ли точка (x, y) внутри окружности с центром в (x0, y0) и радиусом r?
  */
-fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
-    sqr(x - x0) + sqr(y - y0) <= sqr(r)
+
+fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double): Boolean {
+    val distanceFromCenter = sqrt((x - x0).pow(2) + (y - y0).pow(2))
+    return distanceFromCenter <= r
+}
+
 
 /**
  * Простая (2 балла)
@@ -18,7 +23,14 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
-fun isNumberHappy(number: Int): Boolean = TODO()
+fun isNumberHappy(number: Int): Boolean {
+    val number1 = number % 10
+    val number2 = number % 100 / 10
+    val number3 = number % 1000 / 100
+    val number4 = number % 10000 / 1000
+    return number1 + number2 == number3 + number4
+
+}
 
 /**
  * Простая (2 балла)
@@ -27,7 +39,94 @@ fun isNumberHappy(number: Int): Boolean = TODO()
  * Определить, угрожают ли они друг другу. Вернуть true, если угрожают.
  * Считать, что ферзи не могут загораживать друг друга.
  */
-fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
+fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
+
+    var queenx = x1
+    var queeny = y1
+
+    // Queen X increase, Y increase
+    for (i in 1..8) {
+
+        queenx + i
+        queeny + i
+
+        if(queenx == x2 && queeny == y2) {
+            return true
+        }
+
+    }
+    // Queen X increase, Y decrease
+    for (i in 1..8) {
+        queenx + i
+        queeny - i
+
+        if(queenx == x2 && queeny == y2) {
+            return true
+        }
+
+    }
+    // Queen X decrease, Y increase
+    for (i in 1..8) {
+        queenx - i
+        queeny + i
+
+        if(queenx == x2 && queeny == y2) {
+            return true
+        }
+
+    }
+    // Queen X decrease, Y decrease
+    for (i in 1..8) {
+        queenx - i
+        queeny - i
+
+        if(queenx == x2 && queeny == y2) {
+            return true
+        }
+
+    }
+    // Queen X decrease
+    for (i in 1..8) {
+        queenx - i
+
+        if(queenx == x2 && queeny == y2) {
+            return true
+        }
+
+    }
+    // Queen X increase
+    for (i in 1..8) {
+        queenx + i
+
+        if(queenx == x2 && queeny == y2) {
+            return true
+        }
+
+    }
+    // Queen Y increase
+    for (i in 1..8) {
+        queeny + i
+
+        if(queenx == x2 && queeny == y2) {
+            return true
+        }
+
+    }
+    // Queen Y decrease
+    for (i in 1..8) {
+        queeny - i
+
+        if(queenx == x2 && queeny == y2) {
+            return true
+        }
+
+    }
+    return false
+
+}
+
+
+
 
 
 /**
@@ -48,7 +147,12 @@ fun daysInMonth(month: Int, year: Int): Int = TODO()
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = TODO()
+): Boolean {
+    val dist = kotlin.math.sqrt((x1 - x2).pow(2) + (y1 - y2).pow(2))
+    return dist + r1 == r2
+
+
+}
 
 /**
  * Средняя (3 балла)

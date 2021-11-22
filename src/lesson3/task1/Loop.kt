@@ -2,6 +2,7 @@
 
 package lesson3.task1
 
+import lesson4.task1.mean
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -159,7 +160,20 @@ fun isPalindrome(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean = TODO()
+fun hasDifferentDigits(n: Int): Boolean {
+    var rem : Long = 10
+    var mac : Long = 1
+    var numbers = mutableListOf<Double>()
+    while ((rem / 10) - 1 <= n) {
+        numbers.add(((n % rem) / mac).toDouble())
+        rem *= 10
+        mac *= 10
+    }
+    if (mean(numbers) == numbers.minOrNull()?.toDouble()) {
+        return false
+    }
+    return true
+}
 
 /**
  * Средняя (4 балла)
